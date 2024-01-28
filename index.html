@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOON</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @media screen and (max-width: 800px) {
+        body {
+            background-color: #050505;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            font-family: monospace;
+        }
+
+         /* Add this rule for the black background on the menu */
+         .menu-overlay {
+            position: fixed;
+            top: 16px;
+            left: 0;
+            width: 100%;
+            height: 40px; /* Adjust the height as needed to cover the menu */
+            background-color: black;
+            z-index: 3;
+            /* Adjust the opacity as needed */
+        }
+
+        #hi-text {
+            position: fixed;
+            text-align: center;
+            top: 8px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            font-size: 12px; /* Adjust font size as needed */
+            padding: 1px; /* Adjust top and bottom padding as needed */
+            color: black;
+            background-color: #dfebf6;
+            transform: translateY(-50%);
+            z-index: 4;
+        }
+
+        .image-container {
+            margin-top: 50px; /* Adjust margin as needed */
+        }
+
+        .scade-image {
+            position: relative;
+            top: 30px;
+            width: 100%; /* Adjust width as needed */
+            max-width: 500px; /* Set a maximum width if necessary */
+            height: auto;
+        }
+
+        .logo img {
+            position: fixed;
+            top: 18px;
+            left: 140px;
+            width: 100px;
+            z-index: 3;
+        }
+
+    #menu__toggle {
+  opacity: 0;
+}
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+.menu__btn {
+  position: fixed;
+  top: 32px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 5;
+}
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  transition-duration: .25s;
+}
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+  background-color: black;
+}
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+
+#menu__toggle:checked + .menu__btn > span::before,
+  #menu__toggle:checked + .menu__btn > span::after {
+    background-color: black;
+  }
+
+  .menu__box {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 320px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #dfebf6;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+  z-index: 4;
+  font-family: monospace;
+  
+}
+
+.menu__item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 15px 24px;
+  color: black;
+  font-family: monospace;
+  font-size: 19px;
+  text-decoration: none;
+  transition-duration: .25s;
+}
+
+.menu__item:hover {
+  background-color: #CFD8DC;
+}
+
+.cart-icon {
+    position: fixed;
+    top: 23px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.cart-icon img {
+    width: 25px; /* Adjust width as needed */
+}
+
+.front img {
+    position: relative;
+    top: 60px;
+}
+
+.slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            top: 6px;
+            margin: auto;
+          
+        }
+
+        .mySlides {
+            display: none;
+            width: 100%;
+        }
+
+        .Tee img {
+          position: relative;
+          width: 300px;
+          top: 120px;
+
+        }
+
+        #cartMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+        color: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it has a higher z-index than other elements */
+    }
+
+    #cartMenu p {
+        position: relative;
+        top: 100px;
+        font-size: 18px;
+    }
+
+    #cartMenu {
+        background-color: black;
+    }
+
+    #cartMenu button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Add this block for the search bar styles */
+/* Existing styles for other elements */
+
+/* New styles for the search bar */
+.search-bar {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    display: flex;
+}
+
+.search-bar input {
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-family: monospace;
+}
+
+.search-bar button {
+    padding: 5px;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    background-color: white; /* Adjust the color as needed */
+    color: white;
+    cursor: pointer;
+}
+
+.search-bar input:focus {
+    outline: none;
+}
+
+/* Make the selector more specific */
+
+.shop-now-button {
+    position: relative;
+    top: -140px;
+    padding: 5px 10px;
+    color: black;
+    background-color: #dfebf6;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+        }
+      }
+    </style>
+</head>
+<body>
+    
+    <div id="hi-text"></div>
+
+    <div class="menu-overlay"></div>
+
+    <div class="hamburger-menu">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+
+        <ul class="menu__box">
+          <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button type="button">
+                <!-- Font Awesome search icon (you can use your preferred icon library) -->
+                <i style="font-size:24px" class="fa">&#xf002;</i>
+            </button>
+          </div>
+          
+          <li><a class="menu__item" href="#">HOME</a></li>
+          <li><a class="menu__item" href="#">ABOUT</a></li>
+          <li><a class="menu__item" href="#">CONTACT</a></li>
+        </ul>
+      </div>
+
+      <div class="cart-icon">
+        <img src="cloud/whc.png" alt="White Cart Icon">
+    </div>
+
+    <div id="cartMenu" class="menu-overlay" style="display:none;">
+      <button id="closeCartMenu">Close</button>
+      <p id="cartMessage">Cart is empty</p>
+      <!-- Add more menu items or content as needed -->
+  </div>
+
+    <div class="logo">
+        <img src="cloud/moon1.png" alt="Scade Image" class="scade-image">
+    </div>
+
+    <div class="slideshow-container">
+      <div class="mySlides">
+          <img src="cloud/mb1.jpg" alt="Scade Image" class="scade-image">
+      </div>
+
+      <div class="mySlides">
+          <img src="cloud/mb2.jpg" alt="Scade Image" class="scade-image">
+      </div>
+
+      <div class="mySlides">
+          <img src="cloud/mb3.jpg" alt="Scade Image" class="scade-image">
+      </div>
+
+      <div class="mySlides">
+          <img src="cloud/mb4.jpg" alt="Scade Image" class="scade-image">
+      </div>
+
+      <!-- Add the "Shop Now" button below the slideshow -->
+      <button class="shop-now-button" onclick="location.href='#'">SHOP NOW</button>
+  </div>
+
+
+<!--
+    <div class="Tee">
+      <img src="cloud/micro.jpg" alt="Scade Image" class="scade-image">
+  </div>
+-->
+
+
+
+
+  <div style="height: 1500px"></div>
+
+    <script>
+        const hiText = document.getElementById('hi-text');
+        const texts = [
+            "CYBER MONDAY SALE UP TO 60% OFF - SHOP NOW!",
+            "WELCOME",
+            "GREAT DEALS INSIDE - DON'T MISS OUT!",
+            "EXCLUSIVE OFFERS FOR TODAY ONLY!"
+        ];
+        let index = 0;
+
+        function updateText() {
+            hiText.textContent = texts[index];
+            index = (index + 1) % texts.length;
+        }
+
+        setInterval(updateText, 3000); // Change text every 2 seconds
+        updateText(); // Initial text update
+
+          // Slideshow functionality
+          let slideIndex = 0;
+
+function showSlides() {
+    const slides = document.getElementsByClassName("mySlides");
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].style.display = "block";
+    setTimeout(showSlides, 4000); // Change image every 2 seconds
+}
+
+showSlides(); // Initial slideshow start
+
+
+
+        const cartIcon = document.querySelector('.cart-icon');
+const cartMenu = document.getElementById('cartMenu');
+const cartMessage = document.getElementById('cartMessage');
+
+// Handle cart icon click event
+cartIcon.addEventListener('click', () => {
+    // Check if the cart is empty (replace with your actual logic)
+    const isCartEmpty = true; // Replace with your actual logic
+    if (isCartEmpty) {
+        // Show the cart menu and display the empty cart message
+        cartMenu.style.display = window.innerWidth <= 800 ? 'block' : 'flex';
+        cartMessage.textContent = 'Cart is empty';
+    } else {
+        // Add logic to display the items in the cart or other content
+        // For example: cartMessage.textContent = 'Your cart items here';
+    }
+});
+
+// Close the cart menu when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!cartIcon.contains(event.target) && !cartMenu.contains(event.target)) {
+        cartMenu.style.display = window.innerWidth <= 800 ? 'none' : 'flex';
+    }
+
+    
+});
+
+const closeCartButton = document.getElementById('closeCartMenu');
+
+// Close cart menu when close button is clicked
+closeCartButton.addEventListener('click', () => {
+    cartMenu.style.display = window.innerWidth <= 800 ? 'none' : 'flex';
+});
+
+// Close the cart menu when clicking outside of it
+document.addEventListener('click', (event) => {
+    if (!cartIcon.contains(event.target) && !cartMenu.contains(event.target)) {
+        cartMenu.style.display = window.innerWidth <= 800 ? 'none' : 'flex';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menu__toggle');
+    const menuBtnLabel = document.querySelector('.menu__btn');
+
+    menuBtnLabel.addEventListener('click', function (event) {
+        // Prevent the default behavior of the label click event
+        event.preventDefault();
+
+        // Toggle the checkbox state manually
+        menuToggle.checked = !menuToggle.checked;
+    });
+});
+
+    </script>
+
+</body>
+</html>
